@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b77tsfog6ywd"]
+[gd_scene load_steps=10 format=3 uid="uid://b77tsfog6ywd"]
 
+[ext_resource type="Script" uid="uid://bowid4n8gajh3" path="res://mob.gd" id="1_1qmh0"]
 [ext_resource type="Texture2D" uid="uid://1mc614w0uajc" path="res://art/enemyFlyingAlt_1.png" id="1_b3mxk"]
 [ext_resource type="Texture2D" uid="uid://bi3ch06j4k272" path="res://art/enemyFlyingAlt_2.png" id="2_1qmh0"]
 [ext_resource type="Texture2D" uid="uid://dqgykmrdpe2wm" path="res://art/enemySwimming_1.png" id="3_gfurk"]
@@ -47,22 +48,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Mob" type="Node2D"]
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
+[node name="Mob" type="RigidBody2D"]
+script = ExtResource("1_1qmh0")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-collision_mask = 0
-gravity_scale = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pcqmr")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="RigidBody2D"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 enable_node_path = NodePath("../CollisionShape2D")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_jbnni")
 animation = &"flying"
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
