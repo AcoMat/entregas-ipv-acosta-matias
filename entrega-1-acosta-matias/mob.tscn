@@ -23,7 +23,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"flying",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -34,7 +34,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"swimming",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -45,11 +45,12 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking",
-"speed": 5.0
+"speed": 3.0
 }]
 
-[node name="Mob" type="RigidBody2D"]
-position = Vector2(40, 58)
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource("1_1qmh0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -62,6 +63,7 @@ enable_node_path = NodePath("../CollisionShape2D")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_jbnni")
-animation = &"flying"
+animation = &"walking"
+frame_progress = 0.917698
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
