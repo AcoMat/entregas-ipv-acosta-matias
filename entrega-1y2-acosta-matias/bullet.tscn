@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://modeghk7mw2v"]
+
+[ext_resource type="Texture2D" uid="uid://b5hxlwrrwhrsp" path="res://assets/bullet.png" id="2_t4vbm"]
+
+[node name="Bullet" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_t4vbm")
