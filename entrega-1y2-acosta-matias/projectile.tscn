@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddj1vg7hmqbya"]
+
+[ext_resource type="PackedScene" uid="uid://cnq7vec05g312" path="res://AbstractProjectile.tscn" id="1_oqhna"]
+
+[node name="AbstractProyectile" instance=ExtResource("1_oqhna")]
+
+[node name="Duration" type="Timer" parent="." index="1"]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Duration" to="." method="_on_duration_timeout"]

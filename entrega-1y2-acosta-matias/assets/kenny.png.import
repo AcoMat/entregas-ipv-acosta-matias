@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djesf223prw00"
-path="res://.godot/imported/kenny-mccormick.png-8253e79eb9bbe140bda6641d2d726c17.ctex"
+path="res://.godot/imported/kenny.png-d7c95beeeb20f88dc823ca45820eb20e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/kenny-mccormick.png"
-dest_files=["res://.godot/imported/kenny-mccormick.png-8253e79eb9bbe140bda6641d2d726c17.ctex"]
+source_file="res://assets/kenny.png"
+dest_files=["res://.godot/imported/kenny.png-d7c95beeeb20f88dc823ca45820eb20e.ctex"]
 
 [params]
 

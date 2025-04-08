@@ -1,27 +1,29 @@
 extends Node2D
 
-signal player_shoot
-
-var speed = 200
+var player_speed = 500
+var projectile_container
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("Player created")
 	pass # Replace with function body.
 
 
+func set_projectile_container(container: Node):
+	$Cannon.projectile_container = container
+	projectile_container = container
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x += (int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))) * speed * delta
-	$GunSprite.look_at(get_global_mouse_position())
+	var velocity = Vector2.ZERO # The player's movement vector.
+	if Input.is_action_pressed("move_right"):
+		velocity.x += player_speed
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= player_speed
+	position += velocity * delta
+	
 	if(Input.is_action_pressed("player_shoot")):
-		shoot()
-
-
-func shoot():
-	if($ShootColdown.is_stopped()):
-		print("shoot")
-		$ShootColdown.start()
-		player_shoot.emit()
-	else:
-		print("no shoot")
+		$Cannon.shoot()
+		
+	$Cannon.look_at(get_global_mouse_position())
+	
+	

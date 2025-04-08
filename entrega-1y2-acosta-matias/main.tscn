@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwkixphmv2dtm"]
+[gd_scene load_steps=4 format=3 uid="uid://bogfgt0py1g6c"]
 
-[ext_resource type="Script" uid="uid://bv6sndpay6d18" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://ca0fec62xubr6" path="res://player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://modeghk7mw2v" path="res://bullet.tscn" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://c2yblp2lwxog2" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dy0u707jul652" path="res://Player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ch2b75h51ekfl" path="res://Torret.tscn" id="3_h2yge"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
-bullet_scene = ExtResource("2_h2yge")
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(581, 316)
+position = Vector2(585, 544)
 
-[connection signal="player_shoot" from="Player" to="." method="_on_player_player_shoot"]
+[node name="Torret" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(215, 155)
+
+[node name="Torret2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(977, 155)

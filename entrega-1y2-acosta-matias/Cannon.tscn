@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnobct47wilhd"]
+
+[ext_resource type="Script" uid="uid://cmp2eyf0l811v" path="res://cannon.gd" id="1_i175o"]
+[ext_resource type="PackedScene" uid="uid://ddj1vg7hmqbya" path="res://projectile.tscn" id="2_pu81y"]
+[ext_resource type="Texture2D" uid="uid://dba5e7j4un3cl" path="res://assets/gun.png" id="2_ria0b"]
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource("1_i175o")
+projectile_scene = ExtResource("2_pu81y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ria0b")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(54, 0)
+
+[node name="ShootColdown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
