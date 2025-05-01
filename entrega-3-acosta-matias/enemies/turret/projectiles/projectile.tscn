@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhrxm3h7uky4e"]
+
+[ext_resource type="Script" uid="uid://ct8oxseaw1btp" path="res://enemies/turret/projectiles/projectile.gd" id="1_n54in"]
+[ext_resource type="Texture2D" uid="uid://nag7k7e7n1ld" path="res://enemies/turret/projectiles/projectile.webp" id="2_l7c4w"]
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_n54in")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_l7c4w")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true

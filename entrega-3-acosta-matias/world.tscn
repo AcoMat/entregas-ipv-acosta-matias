@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://buvwhqhvvgu0d"]
+
+[ext_resource type="Texture2D" uid="uid://hof4e1jjn7jq" path="res://assets/ground.webp" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://b0qpxjl0imbh3" path="res://player/player.tscn" id="2_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://bjuklgscsls85" path="res://assets/sky.jpg" id="3_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://bs4qpm75sx0i1" path="res://assets/world_textures.png" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://bmckcgeghvkw8" path="res://enemies/turret/Turret.tscn" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://bhrxm3h7uky4e" path="res://enemies/turret/projectiles/projectile.tscn" id="6_dwbse"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlwt5"]
+size = Vector2(4516, 366)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
+size = Vector2(100, 102)
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_tlwt5")]
+position = Vector2(538, 163)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(574, 602)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture_repeat = 2
+position = Vector2(0.215, 0)
+scale = Vector2(0.255, 0.255)
+texture = ExtResource("2_fj7yv")
+region_enabled = true
+region_rect = Rect2(-6564, -219, 17651, 1422)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_tlwt5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_top = -107.0
+offset_right = 1152.0
+offset_bottom = 600.0
+texture = ExtResource("3_tlwt5")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(800, 101)
+mass = 0.005
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("4_aqk2v")
+region_enabled = true
+region_rect = Rect2(5, 117, 99, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_036b0")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(747, -3)
+mass = 0.005
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+scale = Vector2(0.565, 0.565)
+texture = ExtResource("4_aqk2v")
+region_enabled = true
+region_rect = Rect2(5, 117, 99, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+scale = Vector2(0.565, 0.565)
+shape = SubResource("RectangleShape2D_036b0")
+
+[node name="Turret" parent="." node_paths=PackedStringArray("worldScene") instance=ExtResource("5_036b0")]
+position = Vector2(1051, 13)
+worldScene = NodePath("..")
+projectileScene = ExtResource("6_dwbse")
