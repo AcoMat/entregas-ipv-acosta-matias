@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqveuujrhr157"]
+
+[ext_resource type="Script" uid="uid://uxsfak82it72" path="res://src/entities/enemies/turret.gd" id="1_fq2wn"]
+[ext_resource type="Texture2D" uid="uid://ckb03884evgqt" path="res://assets/textures/enemies/golem/Golem_IdleA.png" id="2_87r72"]
+[ext_resource type="PackedScene" uid="uid://st2liyq8odwn" path="res://src/entities/enemies/TurretProjectile.tscn" id="3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq2wn"]
+atlas = ExtResource("2_87r72")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87r72"]
+atlas = ExtResource("2_87r72")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4bhr"]
+atlas = ExtResource("2_87r72")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chgy7"]
+atlas = ExtResource("2_87r72")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aag6v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq2wn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87r72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4bhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chgy7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 328.39
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_87r72"]
+radius = 19.4165
+
+[node name="Turret" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_fq2wn")
+projectile_scene = ExtResource("3")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="FirePosition" type="Marker2D" parent="."]
+position = Vector2(0, -30.0339)
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.54, 1.54)
+sprite_frames = SubResource("SpriteFrames_aag6v")
+autoplay = "default"
+frame_progress = 0.60596
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_87r72")
+
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

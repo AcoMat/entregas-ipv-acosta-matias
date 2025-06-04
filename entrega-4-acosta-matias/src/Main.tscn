@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bompmwqbf6p1j"]
+
+[ext_resource type="PackedScene" uid="uid://bl1cxi7ldrowc" path="res://src/entities/enviroment/Floor.tscn" id="1_hk4rc"]
+[ext_resource type="PackedScene" uid="uid://cqveuujrhr157" path="res://src/entities/enemies/Turret.tscn" id="3_chrbn"]
+[ext_resource type="Texture2D" uid="uid://d0n6feneyna31" path="res://assets/textures/background/Space Background.png" id="4_5qjmp"]
+[ext_resource type="PackedScene" uid="uid://cgsc23iwwaan8" path="res://src/entities/player/Player.tscn" id="7"]
+
+[sub_resource type="GDScript" id="GDScript_esc46"]
+script/source = "extends Node
+
+func _ready() -> void:
+	randomize()
+
+
+func _process(delta):
+	if $Player:
+		$Camera2D.position = $Player.global_position
+
+## Agregamos un botoncito primitivo de reset
+func _input(event: InputEvent) -> void:
+	if event.is_action(\"reset\"):
+		get_tree().reload_current_scene()
+"
+
+[node name="Main" type="Node2D"]
+script = SubResource("GDScript_esc46")
+
+[node name="Floor" parent="." instance=ExtResource("1_hk4rc")]
+
+[node name="Player" parent="." instance=ExtResource("7")]
+
+[node name="Turret" parent="." instance=ExtResource("3_chrbn")]
+position = Vector2(679, 510)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0)
+motion_mirroring = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_5qjmp")
+centered = false

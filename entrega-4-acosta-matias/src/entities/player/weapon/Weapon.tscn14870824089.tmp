@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://kfb0v2yp5ddk"]
+
+[ext_resource type="Script" uid="uid://bfvr2o5nx0n8a" path="res://src/entities/player/weapon/weapon.gd" id="1_5bbfq"]
+[ext_resource type="Texture2D" uid="uid://btldlggkvtybc" path="res://assets/textures/player/staff.png" id="2_qtiat"]
+[ext_resource type="Texture2D" uid="uid://cgroca0cxchny" path="res://assets/textures/fx/hits/hits-1/hits-1-1.png" id="3_nf7kx"]
+[ext_resource type="Texture2D" uid="uid://cqypmw8hk3nl7" path="res://assets/textures/fx/hits/hits-1/hits-1-2.png" id="4_fdwv6"]
+[ext_resource type="Texture2D" uid="uid://cmiosgp8ohbkd" path="res://assets/textures/fx/hits/hits-1/hits-1-3.png" id="5_k8nl1"]
+[ext_resource type="Texture2D" uid="uid://bk4v2lcma0olt" path="res://assets/textures/fx/hits/hits-1/hits-1-4.png" id="6_bmqj2"]
+[ext_resource type="Texture2D" uid="uid://bbxi7ukwxk1gw" path="res://assets/textures/fx/hits/hits-1/hits-1-5.png" id="7_1lpba"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nf7kx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nf7kx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fdwv6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k8nl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bmqj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1lpba")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_5bbfq")
+
+[node name="WeaponTip" type="Marker2D" parent="."]
+position = Vector2(2, 6)
+
+[node name="WeaponCooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="WeaponSprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_qtiat")
+
+[node name="WeaponAnim" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_nf7kx")
+animation = &"shoot"
+
+[connection signal="animation_finished" from="WeaponAnim" to="." method="_on_weapon_anim_animation_finished"]
